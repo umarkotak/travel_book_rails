@@ -15,7 +15,13 @@ class ApiController < ApplicationController
   def verify_account
     service = Auth::Authenticator.new(request.headers["Authorization"].to_s)
     service.call
-    @account = service.result
+    @user = service.result
+  end
+
+  def verify_role(user, expected_roles)
+    unless expected_roles.includes?(user.role)
+      raise "403 || you don't have enough access"
+    end
   end
 
   def embed_time_zone_to_params

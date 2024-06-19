@@ -13,5 +13,20 @@ Rails.application.routes.draw do
   post '/api/v1/u/bookings/:booking_number/pay', to: 'user/bookings#pay'
 
   # Admin apis
+  get '/api/v1/a/users', to: 'admin/users#list'
   get '/api/v1/a/bookings', to: 'admin/bookings#list'
+  get '/api/v1/a/bookings/:booking_number', to: 'admin/bookings#detail'
+  post '/api/v1/a/bookings/:booking_number/:action', to: 'admin/bookings#action'
+
+  get '/api/v1/a/camping_packages', to: 'admin/camping_packages#list'
+  get '/api/v1/a/camping_packages/:id', to: 'admin/camping_packages#detail'
+  post '/api/v1/a/camping_packages', to: 'admin/camping_packages#create'
+  patch '/api/v1/a/camping_packages/:id', to: 'admin/camping_packages#update'
+  delete '/api/v1/a/camping_packages/:id', to: 'admin/camping_packages#delete'
+
+  get '/api/v1/a/camping_items', to: 'admin/camping_items#list'
+  get '/api/v1/a/camping_items/:id', to: 'admin/camping_items#detail'
+  post '/api/v1/a/camping_items', to: 'admin/camping_items#create'
+  patch '/api/v1/a/camping_items/:id', to: 'admin/camping_items#update'
+  delete '/api/v1/a/camping_items/:id', to: 'admin/camping_items#delete'
 end
