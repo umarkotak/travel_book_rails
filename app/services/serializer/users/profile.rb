@@ -6,7 +6,7 @@ module Serializer
       end
 
       def call
-        @user.attributes.except("session", "password")
+        @user.attributes.except("id", "session", "password")
       end
     end
   end

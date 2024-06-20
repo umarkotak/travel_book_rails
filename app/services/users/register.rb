@@ -31,6 +31,7 @@ module Users
         email: @params[:email],
         phone: @params[:phone],
         password: @params[:password],
+        verification: "pending",
         role: "user"
       )
     end

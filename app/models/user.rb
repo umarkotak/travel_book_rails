@@ -5,6 +5,8 @@ class User < ApplicationRecord
             presence: true
   validates :role,
             inclusion: { in: %w(user admin) }
+  validates :verification,
+            inclusion: { in: %w(pending verified) }
 
   has_many :bookings
 end

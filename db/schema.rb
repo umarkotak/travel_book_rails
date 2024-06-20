@@ -10,20 +10,54 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_19_133748) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_19_234942) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "users", force: :cascade do |t|
-    t.string "guid"
-    t.string "name"
-    t.string "email"
-    t.string "phone"
-    t.string "password"
-    t.string "role"
-    t.string "session"
+  create_table "camping_items", force: :cascade do |t|
+    t.string "slug", null: false
+    t.string "name", null: false
+    t.string "description"
+    t.string "thumbnail_url", null: false
+    t.float "weekday_price", null: false
+    t.float "weekend_price", null: false
+    t.integer "daily_stock", null: false
     t.timestamptz "created_at", null: false
     t.timestamptz "updated_at", null: false
+    t.timestamptz "deleted_at"
+    t.index ["slug"], name: "index_camping_items_on_slug", unique: true
+  end
+
+  create_table "camping_packets", force: :cascade do |t|
+    t.string "slug", null: false
+    t.string "name", null: false
+    t.string "description"
+    t.string "thumbnail_url", null: false
+    t.timestamptz "started_at", null: false
+    t.timestamptz "ended_at", null: false
+    t.float "weekday_price", null: false
+    t.float "weekend_price", null: false
+    t.integer "daily_stock", null: false
+    t.string "includes", default: [], array: true
+    t.jsonb "specs", default: {}
+    t.timestamptz "created_at", null: false
+    t.timestamptz "updated_at", null: false
+    t.timestamptz "deleted_at"
+    t.index ["slug"], name: "index_camping_packets_on_slug", unique: true
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "guid", null: false
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "phone", null: false
+    t.string "password", null: false
+    t.string "role", null: false
+    t.string "session"
+    t.string "verification", null: false
+    t.timestamptz "created_at", null: false
+    t.timestamptz "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end
