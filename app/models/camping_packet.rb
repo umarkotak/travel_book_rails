@@ -1,0 +1,2 @@
+class CampingPacket < ApplicationRecord
+end

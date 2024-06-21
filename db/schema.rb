@@ -32,13 +32,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_19_234942) do
     t.string "slug", null: false
     t.string "name", null: false
     t.string "description"
-    t.string "thumbnail_url", null: false
+    t.string "main_thumbnail", null: false
+    t.string "thumbnails", default: [], array: true
     t.timestamptz "started_at", null: false
     t.timestamptz "ended_at", null: false
     t.float "weekday_price", null: false
     t.float "weekend_price", null: false
     t.integer "daily_stock", null: false
-    t.string "includes", default: [], array: true
+    t.string "facilitates", default: [], array: true
     t.jsonb "specs", default: {}
     t.timestamptz "created_at", null: false
     t.timestamptz "updated_at", null: false

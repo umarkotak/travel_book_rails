@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get '/health', to: 'health_controller#health'
+
   # User apis
   post '/api/v1/u/users/register', to: 'user/users#register'
   post '/api/v1/u/users/login', to: 'user/users#login'
@@ -29,4 +31,6 @@ Rails.application.routes.draw do
   post '/api/v1/a/camping_items', to: 'admin/camping_items#create'
   patch '/api/v1/a/camping_items/:id', to: 'admin/camping_items#update'
   delete '/api/v1/a/camping_items/:id', to: 'admin/camping_items#delete'
+
+  post '/api/v1/internal/seed/quick', to: 'seed#seed'
 end

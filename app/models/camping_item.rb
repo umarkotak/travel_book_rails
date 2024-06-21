@@ -1,0 +1,2 @@
+class CampingItem < ApplicationRecord
+end
