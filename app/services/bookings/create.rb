@@ -89,7 +89,7 @@ module Bookings
           payment_status: "",
           payment_metada: {},
           started_at: start_date,
-          ended_at: end_date,
+          ended_at: end_date + 1.day,
           num_nights: num_nights,
           metadata: {},
         })
