@@ -18,7 +18,6 @@ module Bookings
     end
 
     def execute_logic
-      # TODO: Calculate num days
       start_date = params[:date_start_wib].to_datetime.change(:offset => "+0700")
       end_date = params[:date_end_wib].to_datetime.change(:offset => "+0700")
       end_date = end_date - 1.day
