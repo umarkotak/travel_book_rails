@@ -10,17 +10,54 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_19_234942) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_22_053215) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "booking_details", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "booking_id"
+    t.string "item_type", null: false
+    t.integer "item_id", null: false
+    t.integer "weekday_price", default: 0
+    t.integer "weekday_quantity", default: 0
+    t.integer "weekend_price", default: 0
+    t.integer "weekend_quantity", default: 0
+    t.integer "quantity", null: false
+    t.integer "total_price", null: false
+    t.timestamptz "created_at", null: false
+    t.timestamptz "updated_at", null: false
+    t.timestamptz "deleted_at"
+    t.index ["booking_id"], name: "index_booking_details_on_booking_id"
+    t.index ["user_id"], name: "index_booking_details_on_user_id"
+  end
+
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "number", null: false
+    t.string "payment_number", null: false
+    t.integer "total_price", null: false
+    t.integer "discount_price", null: false
+    t.string "mdr_cut", null: false
+    t.string "grand_total_price", null: false
+    t.string "status", null: false
+    t.string "payment_status", null: false
+    t.jsonb "payment_metada", default: {}
+    t.timestamptz "started_at", null: false
+    t.timestamptz "ended_at", null: false
+    t.integer "num_nights", null: false
+    t.jsonb "metadata", default: {}
+    t.timestamptz "created_at", null: false
+    t.timestamptz "updated_at", null: false
+    t.timestamptz "deleted_at"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
 
   create_table "camping_items", force: :cascade do |t|
     t.string "slug", null: false
     t.string "name", null: false
-    t.string "description"
-    t.string "thumbnail_url", null: false
-    t.float "weekday_price", null: false
-    t.float "weekend_price", null: false
+    t.string "image", null: false
+    t.float "price", null: false
     t.integer "daily_stock", null: false
     t.timestamptz "created_at", null: false
     t.timestamptz "updated_at", null: false
