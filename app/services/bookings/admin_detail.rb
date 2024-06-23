@@ -1,5 +1,5 @@
 module Bookings
-  class MyDetail < BaseService
+  class AdminDetail < BaseService
     def initialize(user, params)
       @user = user
       @params = params.permit(:booking_number).permit!
@@ -13,16 +13,15 @@ module Bookings
     private
 
     def validates
+      if @user.role != "admin"
+        raise "403 || sorry, you don't have sufficient permission"
+      end
     end
 
     def execute_logic
       booking = Booking.find_by({
         number: params[:booking_number]
       })
-
-      if @user.id != booking.user_id
-        raise "403 || you don't have insufficient access"
-      end
 
       final_booking = booking.attributes
 

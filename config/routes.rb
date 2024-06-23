@@ -12,25 +12,25 @@ Rails.application.routes.draw do
   get '/api/v1/u/bookings', to: 'user/bookings#my_list'
   get '/api/v1/u/bookings/:booking_number', to: 'user/bookings#my_detail'
   post '/api/v1/u/bookings/create', to: 'user/bookings#create'
-  post '/api/v1/u/bookings/:booking_number/pay', to: 'user/bookings#pay'
+  post '/api/v1/u/bookings/:booking_number/pay', to: 'user/bookings#pay' # TODO
 
   # Admin apis
-  get '/api/v1/a/users', to: 'admin/users#list'
+  get '/api/v1/a/users', to: 'admin/users#list' # TODO
   get '/api/v1/a/bookings', to: 'admin/bookings#admin_list'
-  get '/api/v1/a/bookings/:booking_number', to: 'admin/bookings#detail'
-  post '/api/v1/a/bookings/:booking_number/:action', to: 'admin/bookings#action'
+  post '/api/v1/a/bookings/:booking_number/action/:status', to: 'admin/bookings#admin_action' # TODO
+  get '/api/v1/a/bookings/:booking_number', to: 'admin/bookings#admin_detail'
 
-  get '/api/v1/a/camping_packets', to: 'admin/camping_packets#list'
-  get '/api/v1/a/camping_packets/:id', to: 'admin/camping_packets#detail'
-  post '/api/v1/a/camping_packets', to: 'admin/camping_packets#create'
-  patch '/api/v1/a/camping_packets/:id', to: 'admin/camping_packets#update'
-  delete '/api/v1/a/camping_packets/:id', to: 'admin/camping_packets#delete'
+  get '/api/v1/a/camping_packets', to: 'admin/camping_packets#list' # TODO
+  get '/api/v1/a/camping_packets/:id', to: 'admin/camping_packets#detail' # TODO
+  post '/api/v1/a/camping_packets', to: 'admin/camping_packets#create' # TODO
+  patch '/api/v1/a/camping_packets/:id', to: 'admin/camping_packets#update' # TODO
+  delete '/api/v1/a/camping_packets/:id', to: 'admin/camping_packets#delete' # TODO
 
-  get '/api/v1/a/camping_items', to: 'admin/camping_items#list'
-  get '/api/v1/a/camping_items/:id', to: 'admin/camping_items#detail'
-  post '/api/v1/a/camping_items', to: 'admin/camping_items#create'
-  patch '/api/v1/a/camping_items/:id', to: 'admin/camping_items#update'
-  delete '/api/v1/a/camping_items/:id', to: 'admin/camping_items#delete'
+  get '/api/v1/a/camping_items', to: 'admin/camping_items#list' # TODO
+  get '/api/v1/a/camping_items/:id', to: 'admin/camping_items#detail' # TODO
+  post '/api/v1/a/camping_items', to: 'admin/camping_items#create' # TODO
+  patch '/api/v1/a/camping_items/:id', to: 'admin/camping_items#update' # TODO
+  delete '/api/v1/a/camping_items/:id', to: 'admin/camping_items#delete' # TODO
 
   post '/api/v1/internal/seed/quick', to: 'seed#seed'
 end

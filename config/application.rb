@@ -30,5 +30,7 @@ module TravelBook
     config.api_only = true
 
     Dotenv::Railtie.load
+
+    config.hosts << "5bt69x77-3050.asse.devtunnels.ms"
   end
 end

@@ -20,5 +20,8 @@
 # end
 
 class Booking < ApplicationRecord
+  validates :status,
+            inclusion: { in: %w(initialized rejected accepted expired cancelled payment_completed completed) }
+
   belongs_to :user
 end

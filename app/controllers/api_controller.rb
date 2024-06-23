@@ -19,7 +19,7 @@ class ApiController < ApplicationController
   end
 
   def verify_role(user, expected_roles)
-    unless expected_roles.includes?(user.role)
+    unless expected_roles.include?(user.role)
       raise "403 || you don't have enough access"
     end
   end
