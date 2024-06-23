@@ -221,6 +221,19 @@ class SeedController < ApiController
       CampingItem.create!(oneCampingItem)
     end
 
+    unless User.find_by(id: 1).present?
+      User.create!({
+        id: 1,
+        guid: SecureRandom.uuid,
+        name: "admin",
+        email: "admin@gmail.com",
+        phone: "085243214321",
+        password: "admin",
+        role: "admin",
+        verification: "verified",
+      })
+    end
+
     render_response(data: {"seed": "ok"})
   end
 end

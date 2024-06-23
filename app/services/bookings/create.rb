@@ -59,17 +59,28 @@ module Bookings
 
       camping_items.each do |camping_item|
         booking_detail = BookingDetail.new(
+          # {
+          #   user_id: @user.id,
+          #   item_type: "camping_item",
+          #   item_id: camping_item.id,
+          #   weekday_price: camping_item.price,
+          #   weekday_quantity: week_count["weekday"].to_i,
+          #   weekend_price: camping_item.price,
+          #   weekend_quantity: week_count["weekend"].to_i,
+          #   quantity: params[:rent_equipments][camping_item.slug].to_i,
+          #   total_price: ((camping_item.price * week_count["weekday"].to_f) + (camping_item.price * week_count["weekend"].to_f)) * params[:rent_equipments][camping_item.slug].to_i,
+          # },
           {
             user_id: @user.id,
             item_type: "camping_item",
             item_id: camping_item.id,
-            weekday_price: camping_item.price,
-            weekday_quantity: week_count["weekday"].to_i,
+            weekday_price: 0,
+            weekday_quantity: 0,
             weekend_price: camping_item.price,
-            weekend_quantity: week_count["weekend"].to_i,
+            weekend_quantity: week_count["weekend"].to_i + week_count["weekday"].to_i,
             quantity: params[:rent_equipments][camping_item.slug].to_i,
-            total_price: ((camping_item.price * week_count["weekday"].to_f) + (camping_item.price * week_count["weekend"].to_f)) * params[:rent_equipments][camping_item.slug].to_i,
-          }
+            total_price: params[:rent_equipments][camping_item.slug].to_i * camping_item.price,
+          },
         )
 
         total_price += booking_detail.total_price

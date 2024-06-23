@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   # Admin apis
   get '/api/v1/a/users', to: 'admin/users#list'
-  get '/api/v1/a/bookings', to: 'admin/bookings#list'
+  get '/api/v1/a/bookings', to: 'admin/bookings#admin_list'
   get '/api/v1/a/bookings/:booking_number', to: 'admin/bookings#detail'
   post '/api/v1/a/bookings/:booking_number/:action', to: 'admin/bookings#action'
 
