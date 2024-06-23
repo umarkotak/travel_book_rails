@@ -32,6 +32,7 @@ module Bookings
         tmp_booking = booking.attributes
         tmp_booking[:product_thumbnail] = camping_packet.main_thumbnail
         tmp_booking[:product_name] = camping_packet.name
+        tmp_booking[:human_status] = Const::STATUS_TO_HUMAN_STATUS[booking.status]
 
         final_bookings.push(tmp_booking)
       end

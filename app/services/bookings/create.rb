@@ -38,7 +38,7 @@ module Bookings
 
       booking_details = []
 
-      camping_packets.map do |camping_packet|
+      camping_packets.each do |camping_packet|
         booking_detail = BookingDetail.new(
           {
             user_id: @user.id,
@@ -48,8 +48,8 @@ module Bookings
             weekday_quantity: week_count["weekday"].to_i,
             weekend_price: camping_packet.weekend_price,
             weekend_quantity: week_count["weekend"].to_i,
-            quantity: week_count["weekday"].to_i + week_count["weekend"].to_i,
-            total_price: (camping_packet.weekday_price * week_count["weekday"].to_f) + (camping_packet.weekend_price * week_count["weekend"].to_f),
+            quantity: params[:packets][camping_packet.slug].to_i,
+            total_price: ((camping_packet.weekday_price * week_count["weekday"].to_f) + (camping_packet.weekend_price * week_count["weekend"].to_f)) * params[:packets][camping_packet.slug].to_i,
           }
         )
 
@@ -57,7 +57,7 @@ module Bookings
         booking_details.push(booking_detail)
       end
 
-      camping_items.map do |camping_item|
+      camping_items.each do |camping_item|
         booking_detail = BookingDetail.new(
           {
             user_id: @user.id,
@@ -67,8 +67,8 @@ module Bookings
             weekday_quantity: week_count["weekday"].to_i,
             weekend_price: camping_item.price,
             weekend_quantity: week_count["weekend"].to_i,
-            quantity: week_count["weekday"].to_i + week_count["weekend"].to_i,
-            total_price: (camping_item.price * week_count["weekday"].to_f) + (camping_item.price * week_count["weekend"].to_f),
+            quantity: params[:rent_equipments][camping_item.slug].to_i,
+            total_price: ((camping_item.price * week_count["weekday"].to_f) + (camping_item.price * week_count["weekend"].to_f)) * params[:rent_equipments][camping_item.slug].to_i,
           }
         )
 
@@ -110,7 +110,7 @@ module Bookings
         return { start_date.strftime('%A').downcase => 1 }
       end
 
-      (start_date...end_date).each do |date|
+      (start_date..end_date).each do |date|
         day_name = date.strftime('%A').downcase
         day_counts[day_name] += 1
       end
@@ -121,13 +121,13 @@ module Bookings
     def count_weekdays_of_week(start_date, end_date)
       day_counts = Hash.new(0) # Initialize with default value 0
 
-      if start_date <= end_date
+      if end_date <= start_date
         day_name = start_date.strftime('%A').downcase
         week_name = ["saturday", "sunday"].include?(day_name) ? "weekend" : "weekday"
         return { week_name => 1 }
       end
 
-      (start_date...end_date).each do |date|
+      (start_date..end_date).each do |date|
         day_name = date.strftime('%A').downcase
         week_name = ["saturday", "sunday"].include?(day_name) ? "weekend" : "weekday"
         day_counts[week_name] += 1

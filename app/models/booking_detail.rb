@@ -17,6 +17,9 @@
 # end
 
 class BookingDetail < ApplicationRecord
+  validates :item_type,
+            inclusion: { in: %w(camping_packet camping_item) }
+
   belongs_to :user
   belongs_to :booking
 end

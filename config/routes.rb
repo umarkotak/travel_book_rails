@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get '/api/v1/u/camping_items', to: 'user/camping_packets#equipment_list'
 
   get '/api/v1/u/bookings', to: 'user/bookings#my_list'
-  get '/api/v1/u/bookings/:booking_number', to: 'user/bookings#detail'
+  get '/api/v1/u/bookings/:booking_number', to: 'user/bookings#my_detail'
   post '/api/v1/u/bookings/create', to: 'user/bookings#create'
   post '/api/v1/u/bookings/:booking_number/pay', to: 'user/bookings#pay'
 
