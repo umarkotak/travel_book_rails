@@ -4,8 +4,8 @@ class CreateBookingDetails < ActiveRecord::Migration[7.1]
       t.belongs_to :user
       t.belongs_to :booking
 
-      t.string :item_type, null: false
-      t.integer :item_id, null: false
+      t.string :item_type, null: false, index: true
+      t.integer :item_id, null: false, index: true
       t.integer :weekday_price, default: 0
       t.integer :weekday_quantity, default: 0
       t.integer :weekend_price, default: 0
