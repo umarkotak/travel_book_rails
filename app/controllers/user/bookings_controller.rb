@@ -20,9 +20,9 @@ class User::BookingsController < ApiController
     render_response(data: service.result)
   end
 
-  def admin_list
+  def user_summary
     verify_account
-    service = Bookings::AdminList.new(@user, params)
+    service = Bookings::UserSummary.new(@user, params)
     service.call
     render_response(data: service.result)
   end
